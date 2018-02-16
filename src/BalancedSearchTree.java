@@ -5,31 +5,12 @@ import java.util.ArrayList;
 // be sure to include in class header which tree you have implemented
 public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeADT<T> {
 
-	// inner node class used to store key items and links to other nodes
-	protected class Treenode<K extends Comparable<K>> {
-		
-	    K key;
-        Treenode<K> left;
-        Treenode<K> right;
-	    
-	    public Treenode(K item) {
-			this(item,null,null);
-		}
-		
-	    public Treenode(K item, Treenode<K> left, Treenode<K> right) {
-			key = item;
-			this.left = left;
-			this.right = right;
-		}
-		
-	}
-
 	protected Treenode<T> root;
 
 	public String inAscendingOrder() {
 		
-	    
-		return "" ;
+	    return getAllItems(root);
+		
 	}
 
 	public boolean isEmpty() {
@@ -47,7 +28,7 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 		return 0; 
 	}
 
-	public boolean lookup(T item) throws IllegalArgumentException{
+	public boolean lookup(T item) { //throws IllegalArgumentException{
 	    
 	    if (item == null) {
 	        return false;
@@ -60,11 +41,11 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 	    return false;
 	}
 
-	public void insert(T item) throws DuplicateKeyException, IllegalArgumentException{
+	public void insert(T item) { //throws DuplicateKeyException, IllegalArgumentException{
 		
 	}
 
-	public void delete(T item) throws IllegalArgumentException{
+	public void delete(T item) { //throws IllegalArgumentException{
 		//TODO if item is null or not found in tree, return without error
 		// else remove this item key from the tree and rebalance
 
@@ -82,14 +63,33 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 		return node.key;
 	}
 	
-	private ArrayList<T> getAllItems() {
-	    ArrayList<String> allWords = new ArrayList<String>();
-
-        if (leftChild != null) { allWords.addAll(leftChild.getAllWordsHelper()); }
-        allWords.add(word);
-        if (rightChild != null) { allWords.addAll(rightChild.getAllWordsHelper()); }
-        return allWords; 
+	private String getAllItems(Treenode<T> item) {
+	   
+	    String a = "";
+	    if (item.left != null) { getAllItems(item.left); }
+	    a += item.key;
+	    if(item.right != null) { getAllItems(item.right); }
+	    return a;
 	}
+	
+	// inner node class used to store key items and links to other nodes
+    protected class Treenode<K extends Comparable<K>> {
+        
+        K key;
+        Treenode<K> left;
+        Treenode<K> right;
+        
+        public Treenode(K item) {
+            this(item,null,null);
+        }
+        
+        public Treenode(K item, Treenode<K> left, Treenode<K> right) {
+            key = item;
+            this.left = left;
+            this.right = right;
+        }
+        
+    }
 
 }
 
