@@ -131,6 +131,62 @@ public class TestSearchTree {
 		if (! expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual);
 	}
+	
+	@Test
+	public void test08_checkEmptyHeight() {
+	    expected = "0";
+	    actual = "" + strTree.isEmpty();
+	    if(! expected.equals(actual))
+	        fail("expected: " +expected+ " actual: " +actual);
+	}
+
+	@Test
+	public void test09_checkLookUp() {
+	    strTree.insert("A");
+	    expected = "true";
+	    actual = "" + strTree.lookup("A");
+	    if(! expected.equals(actual))
+	        fail("expected: " +expected+ " actual: " +actual);
+	}
+	
+	@Test
+	public void test10_checkMultipleLookUp() {
+	    strTree.insert("D");
+	    strTree.insert("A");
+	    strTree.insert("C");
+	    strTree.insert("E");
+	    strTree.insert("B");
+	    expected = "true";
+	    actual = "" + strTree.lookup("D");
+	    if(! expected.equals(actual)) {
+	        fail("expected: " +expected+ " actual: " +actual);
+	    }
+	}
+	
+	@Test
+	public void test11_insertNull() {
+	    try {
+	    strTree.insert(null);
+        fail("expected: " +expected+ " actual: " +actual);
+	    } catch (IllegalArgumentException e) {
+	        
+	    }
+	}
+	
+	@Test
+	public void test12_insertDupes() {
+	    try {
+	    strTree.insert("A");
+	    strTree.insert("A");
+	    } catch (DuplicateKeyException e) {
+	        
+	    }
+	}
+	
+	@Test
+	public void test_13_deleteMultiple() {
+	    
+	}
 
 }
 
