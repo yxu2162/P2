@@ -26,8 +26,13 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 	}
 
 	public boolean isEmpty() {
-		//TODO return empty if there are no keys in structure
-		return true;
+		
+	    if (root == null){
+	        return true;
+	    }
+	    
+		return false;
+		
 	}
 
 	public int height() {
@@ -35,17 +40,24 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 		return 0; 
 	}
 
-	public boolean lookup(T item) {
-		//TODO must return true if item is in tree, otherwise false
-		return false;
+	public boolean lookup(T item) throws IllegalArgumentException{
+	    
+	    if (item == null) {
+	        return false;
+	    }
+//	- if n's key equals the key, 
+//	    - return true
+//	- if (key < n's key) 
+//	    - return lookup (left, key)
+//	- return lookup (right, key)		
+	    return false;
 	}
 
-	public void insert(T item) {
-		//TODO if item is null throw IllegalArgumentException, 
-		// otherwise insert into balanced search tree
+	public void insert(T item) throws DuplicateKeyException, IllegalArgumentException{
+		
 	}
 
-	public void delete(T item) {
+	public void delete(T item) throws IllegalArgumentException{
 		//TODO if item is null or not found in tree, return without error
 		// else remove this item key from the tree and rebalance
 
