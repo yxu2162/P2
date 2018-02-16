@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 // starter class for a BalancedSearchTree
 // you may implement AVL, Red-Black, 2-3 Tree, or 2-3-4 Tree
 // be sure to include in class header which tree you have implemented
@@ -5,23 +7,28 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 
 	// inner node class used to store key items and links to other nodes
 	protected class Treenode<K extends Comparable<K>> {
-		public Treenode(K item) {
+		
+	    K key;
+        Treenode<K> left;
+        Treenode<K> right;
+	    
+	    public Treenode(K item) {
 			this(item,null,null);
 		}
-		public Treenode(K item, Treenode<K> left, Treenode<K> right) {
+		
+	    public Treenode(K item, Treenode<K> left, Treenode<K> right) {
 			key = item;
 			this.left = left;
 			this.right = right;
 		}
-		K key;
-		Treenode<K> left;
-		Treenode<K> right;
+		
 	}
 
 	protected Treenode<T> root;
 
 	public String inAscendingOrder() {
-		//TODO : must return comma separated list of keys in ascending order
+		
+	    
 		return "" ;
 	}
 
@@ -73,6 +80,15 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 		// TODO return the key value of the left most node in this subtree
 		// or return node's key if node does not have a left child
 		return node.key;
+	}
+	
+	private ArrayList<T> getAllItems() {
+	    ArrayList<String> allWords = new ArrayList<String>();
+
+        if (leftChild != null) { allWords.addAll(leftChild.getAllWordsHelper()); }
+        allWords.add(word);
+        if (rightChild != null) { allWords.addAll(rightChild.getAllWordsHelper()); }
+        return allWords; 
 	}
 
 }

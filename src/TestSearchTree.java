@@ -75,13 +75,13 @@ public class TestSearchTree {
 			fail("expected: "+expected+ " actual: "+actual);
 	}
 
-//	@Test
-//	public void test02_ascending_order_on_empty_tree() {
-//		expected = "";
-//		actual = strTree.inAscendingOrder();
-//		if (! expected.equals(actual))
-//			fail("expected: "+expected+ " actual: "+actual);
-//	}
+	@Test
+	public void test02_ascending_order_on_empty_tree() {
+		expected = "";
+		actual = strTree.inAscendingOrder();
+		if (! expected.equals(actual))
+			fail("expected: "+expected+ " actual: "+actual);
+	}
 //
 //	@Test
 //	/** tests that the height of an empty tree is 0 */
