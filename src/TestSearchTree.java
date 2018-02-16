@@ -45,6 +45,7 @@ public class TestSearchTree {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+	    
 	}
 
 	/**
@@ -81,55 +82,106 @@ public class TestSearchTree {
 		if (! expected.equals(actual))
 			fail("expected: "+expected+ " actual: "+actual);
 	}
+//
+//	@Test
+//	/** tests that the height of an empty tree is 0 */
+//	public void test03_height_on_empty_tree() {
+//		expected = "0";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	public void test04_isEmpty_after_one_insert() {
+//		strTree.insert("1");
+//		expected = "false";
+//		actual = "" + strTree.isEmpty();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the ascending order after inserting A item is "A," */
+//	public void test05_ascending_order_after_one_insert() {
+//		strTree.insert("A");
+//		expected = "A,";
+//		actual = strTree.inAscendingOrder();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the height after inserting A is 1 */
+//	public void test06_height_after_one_insert() {
+//		strTree.insert("A");
+//		expected = "1";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the height after inserting A and B and and deleting A is 1 */
+//	public void test07_height_after_two_insert_and_one_delete() {
+//		strTree.insert("A");
+//		strTree.insert("B");
+//		strTree.delete("A");
+//		expected = "1";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
 
-	@Test
-	/** tests that the height of an empty tree is 0 */
-	public void test03_height_on_empty_tree() {
-		expected = "0";
-		actual = "" + strTree.height();
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
-	}
-
-	@Test
-	public void test04_isEmpty_after_one_insert() {
-		strTree.insert("1");
-		expected = "false";
-		actual = "" + strTree.isEmpty();
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
-	}
-
-	@Test
-	/** tests that the ascending order after inserting A item is "A," */
-	public void test05_ascending_order_after_one_insert() {
-		strTree.insert("A");
-		expected = "A,";
-		actual = strTree.inAscendingOrder();
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
-	}
-
-	@Test
-	/** tests that the height after inserting A is 1 */
-	public void test06_height_after_one_insert() {
-		strTree.insert("A");
-		expected = "1";
-		actual = "" + strTree.height();
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
-	}
-
-	@Test
-	/** tests that the height after inserting A and B and and deleting A is 1 */
-	public void test07_height_after_two_insert_and_one_delete() {
-		strTree.insert("A");
-		strTree.insert("B");
-		strTree.delete("A");
-		expected = "1";
-		actual = "" + strTree.height();
-		if (! expected.equals(actual))
-			fail("expected: "+expected+ " actual: "+actual);
+//<<<<<<< HEAD
+//	@Test
+//	/** tests that the height of an empty tree is 0 */
+//	public void test03_height_on_empty_tree() {
+//		expected = "0";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	public void test04_isEmpty_after_one_insert() {
+//		strTree.insert("1");
+//		expected = "false";
+//		actual = "" + strTree.isEmpty();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the ascending order after inserting A item is "A," */
+//	public void test05_ascending_order_after_one_insert() {
+//		strTree.insert("A");
+//		expected = "A,";
+//		actual = strTree.inAscendingOrder();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the height after inserting A is 1 */
+//	public void test06_height_after_one_insert() {
+//		strTree.insert("A");
+//		expected = "1";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
+//	}
+//
+//	@Test
+//	/** tests that the height after inserting A and B and and deleting A is 1 */
+//	public void test07_height_after_two_insert_and_one_delete() {
+//		strTree.insert("A");
+//		strTree.insert("B");
+//		strTree.delete("A");
+//		expected = "1";
+//		actual = "" + strTree.height();
+//		if (! expected.equals(actual))
+//			fail("expected: "+expected+ " actual: "+actual);
 	}
 	
 	@Test
@@ -187,6 +239,151 @@ public class TestSearchTree {
 	public void test_13_deleteMultiple() {
 	    
 	}
+
+=======
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test09_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
+//
+//    @Test
+//    /** tests that the height after inserting A and B and and deleting A is 1 */
+//    public void test07_height_after_two_insert_and_one_delete() {
+//        strTree.insert("A");
+//        strTree.insert("B");
+//        strTree.delete("A");
+//        expected = "1";
+//        actual = "" + strTree.height();
+//        if (! expected.equals(actual))
+//            fail("expected: "+expected+ " actual: "+actual);
+//    }
 
 }
 
