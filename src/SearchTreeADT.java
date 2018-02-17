@@ -33,15 +33,15 @@ public interface SearchTreeADT<T extends Comparable<T>> {
 	public int height() ;
 	
 	// if key is in this BST, return true; otherwise, return false
-	public boolean lookup(T item) throws IllegalArgumentException;
+	public boolean lookup(T item); //throws IllegalArgumentException;
 	
 	// add the item (key) to this search tree
 	// throw IllegalArgumentException if item is null
-	public void insert(T item) throws DuplicateKeyException, IllegalArgumentException;
+	public void insert(T item) throws DuplicateKeyException;//, IllegalArgumentException;
 	
 	// remove the item (key) to this search tree
 	// if the item is not found, return without error or side-effect
-	public void delete(T item) throws IllegalArgumentException;
+	public void delete(T item); //throws IllegalArgumentException;
 
 }
 
