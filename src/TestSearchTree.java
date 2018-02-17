@@ -193,7 +193,7 @@ public class TestSearchTree {
     }
 
     @Test
-    public void test09_checkLookUp() {
+    public void test09_checkLookUp() throws DuplicateKeyException {
         strTree.insert("A");
         expected = "true";
         actual = "" + strTree.lookup("A");
@@ -202,7 +202,7 @@ public class TestSearchTree {
     }
 
     @Test
-    public void test10_checkMultipleLookUp() {
+    public void test10_checkMultipleLookUp() throws DuplicateKeyException {
         strTree.insert("D");
         strTree.insert("A");
         strTree.insert("C");
@@ -216,7 +216,7 @@ public class TestSearchTree {
     }
 
     @Test
-    public void test11_insertNull() {
+    public void test11_insertNull() throws DuplicateKeyException {
         try {
             strTree.insert(null);
             fail("expected: " +expected+ " actual: " +actual);
@@ -235,6 +235,8 @@ public class TestSearchTree {
             
         }
     }
+
+
 }
 
 //    @Test
