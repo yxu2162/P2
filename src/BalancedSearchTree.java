@@ -55,7 +55,23 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
     }
 
     public void insert(T item) { //throws DuplicateKeyException, IllegalArgumentException{
-        height+=1;
+        
+        Treenode<T> newNode = new Treenode(item);
+        
+        if (root == null) {
+            root = newNode;
+            height+=1;
+        }
+        
+        else {
+            try {
+                insertHelper(root,newNode);
+                height+=1;
+            } catch ( DuplicateKeyException e) {  
+            }
+        }
+        
+        
     }
 
     public void delete(T item) { //throws IllegalArgumentException{
@@ -77,19 +93,58 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
     }
 
     private String getAllItems(Treenode<T> item) {
+        
         String a = "";
+        
         if(isEmpty()) {
             return "";
         }
+        
         else {
+            
             if (item.left != null) { 
                 getAllItems(item.left); 
             }
+            
             a += item.key;
+            
             if(item.right != null) { 
                 getAllItems(item.right); 
             }
+            
             return a;
+        }
+        
+    }
+    
+    private void insertHelper(Treenode<T> currNode, Treenode<T> newNode) throws DuplicateKeyException {
+        
+        int comesAfter = currNode.key.compareTo(newNode.key);
+        
+        if (comesAfter > 0) {
+          
+            if (currNode.left != null) { 
+                insertHelper(currNode.left, newNode); 
+            }
+            
+            else { 
+                currNode.left = newNode; 
+            }
+            
+        }
+        
+        else if (comesAfter < 0) {
+            
+            if (currNode.right != null) { 
+                insertHelper(currNode.right, newNode); 
+            }
+            
+            else { currNode.right = newNode; }
+            
+        }
+        
+        else { 
+            throw new DuplicateKeyException(); 
         }
     }
 
