@@ -34,21 +34,29 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
             return false;
         }
         else {
-            if(item == root) {
-                return true;
-            }
-            else {
-                if(root.key.compareTo(item)<0) {
-                    
-                }
-            }
+            return lookupHelper(item, root);
         }
         //	- if n's key equals the key, 
         //	    - return true
         //	- if (key < n's key) 
         //	    - return lookup (left, key)
         //	- return lookup (right, key)		
-        return false;
+    }
+
+    private boolean lookupHelper(T item, Treenode<T> node) {
+        boolean lookup = false;
+        if(item == node) {
+            return true;
+        }
+        else {
+            if(item.compareTo(root.key)<0) {
+                lookup = lookupHelper(item, node.left);
+            }
+            if(item.compareTo(root.key)>0) {
+                lookup = lookupHelper(item, node.right);
+            }
+            return lookup;
+        }
     }
 
     public void insert(T item) { //throws DuplicateKeyException, IllegalArgumentException{
@@ -63,6 +71,9 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         // it will be at most 5% of the score for this program assignment
     }
 
+    private void rightRotation(Treenode<T> node) {
+        if(node.height)
+    }
 
     // HINT: define this helper method that can find the smallest key 
     // in a sub-tree with "node" as its root
