@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 // starter class for a BalancedSearchTree
 // you may implement AVL, Red-Black, 2-3 Tree, or 2-3-4 Tree
@@ -66,7 +66,7 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 	private String getAllItems(Treenode<T> item) {
 	   
 	    String a = "";
-	    if (item.left != null) { getAllItems(item.left); }
+	    if (item == null) { getAllItems(item.left); }
 	    a += item.key;
 	    if(item.right != null) { getAllItems(item.right); }
 	    return a;
