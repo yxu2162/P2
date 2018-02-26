@@ -104,40 +104,54 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
     
     }
 
-    private Treenode<T> deleteHelper(Treenode<T> currNode, T key) {
+    private void deleteHelper(Treenode<T> currNode, T key) {
         
-        if(currNode == null) {
-            return null;
-        }
-        int comesAfter = currNode.key.compareTo(key);
-
-        if(comesAfter < 0) {
-            currNode.right = deleteHelper(currNode.right, key);
-        }
-        if(comesAfter > 0) {
-            currNode.left = deleteHelper(currNode.left, key);
-        }
-
-        if(currNode.left == null || currNode.right == null) { //one child or no child
-            
-            if(currNode.left == null && currNode.right == null) {
-                currNode = null;
-            }
-            if(currNode.left == null) {
-                System.out.println(root.key);
-                currNode = currNode.right;
-                System.out.println(root.key);
-                System.out.println(currNode.key);
-                return currNode.right;
-            }
-            else if(currNode.right == null) {
-                currNode = currNode.left;
-                return currNode.left;
-            }
-        }
-        currNode.key = findMinValue(root.right).key;
-        currNode.right = deleteHelper(currNode.right, currNode.key);
-        return currNode;
+          int comesAfter = currNode.key.compareTo(key);
+          if(comesAfter < 0) { //currentNode is smaller, go right
+              deleteHelper(currNode.right, key);
+          }
+          if(comesAfter > 0) { //currentNode is bigger, go left
+              deleteHelper(currNode.left, key);
+          }
+          if(comesAfter == 0) {
+              if(currNode.left == null || currNode.right == null) {
+                  if(currNode.left == null && currNode.right == null) {
+                      currNode = null;    
+                  }
+                  else if(currNode.right == null) {
+                      currNode = currNode.left;
+                  }
+              }
+          }
+//        if(currNode == null) {
+//            return null;
+//        }
+//        int comesAfter = currNode.key.compareTo(key);
+//
+//        if(comesAfter < 0) {
+//            currNode.right = deleteHelper(currNode.right, key);
+//        }
+//        if(comesAfter > 0) {
+//            currNode.left = deleteHelper(currNode.left, key);
+//        }
+//
+//        if(currNode.left == null || currNode.right == null) { //one child or no child
+//            
+//            if(currNode.left == null && currNode.right == null) {
+//                currNode = null;
+//            }
+//            if(currNode.left == null) {
+//                currNode = currNode.right;
+//                return currNode.right;
+//            }
+//            else if(currNode.right == null) {
+//                currNode = currNode.left;
+//                return currNode.left;
+//            }
+//        }
+//        currNode.key = findMinValue(root.right).key;
+//        currNode.right = deleteHelper(currNode.right, currNode.key);
+//        return currNode;
     }
 
     private void insertHelper(Treenode<T> currNode, T key) throws DuplicateKeyException {
