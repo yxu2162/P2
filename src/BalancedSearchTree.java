@@ -137,9 +137,9 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         if(item == null || !lookup(item)) {
             return;
         }
+        
         else {
             deleteHelper(root, item);
-            height -=1;
         }
 
         // NOTE: if you are unable to get delete implemented
@@ -180,40 +180,191 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
     /*
      * 
      */
-    private Treenode<T> deleteHelper(Treenode<T> currNode, T key) {
-
-        if(currNode == null) {
-            return null;
-        }
+    private void deleteHelper(Treenode<T> currNode, T key) {
         
         int comesAfter = currNode.key.compareTo(key);
-        
+
         if(comesAfter < 0) {
-            currNode.right = deleteHelper(currNode.right, key);
+            deleteHelper(currNode.right, key);
         }
-        
+
         if(comesAfter > 0) {
-            currNode.left = deleteHelper(currNode.left, key);
+            deleteHelper(currNode.left, key);
         }
 
-        if(currNode.left == null || currNode.right == null) {
+        if(comesAfter == 0) {
+            Treenode<T> thisNode = currNode;
+            Treenode<T> minParent;
+            Treenode<T> thisLeft;
+            Treenode<T> thisParent;
+           
+            if (currNode == root) {
+                
+                if (root.left == null && root.right == null) {
+                    root = null;
+                }
+                
+                else if(root.right == null) {
+                    root = root.left;
+                }
+               
+                else if(root.left == null){
+                    root = root.right;
+                }
+                    
+                else {
+                    
+                    if(root.right.left != null) {
+                        thisLeft = root.left;
+                        root = findMinValue(root.right);
+                        root.left = thisLeft;
+                        minParent = getParent(root, root.right);
+                        minParent.left = null;
+                        
+                    }
+                    
+                    else {
+                        thisLeft = root.left; 
+                        root = root.right;
+                        root.left = thisLeft;
+                    }
+                    
+                }
+                
+            }
+           
+            else {
+                
+                if (currNode.left == null && currNode.right == null) {
+                    currNode = null;
+                }
+                
+                else if(currNode.right == null) {
+                    thisNode = currNode.left;
+                    thisParent = getParent(root,currNode); 
+                    
+                    if (thisParent.key.compareTo(currNode.key) > 0) {
+                        thisParent.right = thisNode;
+                    }
 
-            if(currNode.left == null) {
-                return currNode.right;
+                    else {
+                        thisParent.left = thisNode;
+                    }
+
+                }
+               
+                else if(currNode.left == null){
+                    thisNode = currNode.right;
+                    thisParent = getParent(root,currNode);
+
+                    if (thisParent.key.compareTo(currNode.key) > 0) {
+                        thisParent.right = thisNode;
+                    }
+
+                    else {
+                        thisParent.left = thisNode;
+                    }
+                        
+                }
+                       
+                else {
+                   thisNode = findMinValue(currNode.right);
+                   minParent = getParent(root,findMinValue(currNode.right));
+                   minParent.left = null;
+                   thisParent = getParent(root,currNode);
+                   
+                   if (thisParent.key.compareTo(currNode.key) > 0) {
+                       thisParent.right = thisNode;
+                   }
+
+                   else {
+                       thisParent.left = thisNode;
+                   }
+                   
+                   thisNode.left = currNode.left;
+                   thisNode.right = currNode.right;
+                   
+                }
+                  
             }
+        }
+    }
+
+                
+                
+//                if(currNode.right.left == nullfindMinValue(currNode.right) != null) {
+//
+//                    thisNode = findMinValue(currNode.right);
+//                    minParent = getParent(root, findMinValue(currNode.right));
+//                    minParent.left = null;
+//                }
+//            
+//            else {
+//                thisNode = currNode.right;
+//            }
+//            
+//            if (key != root.key) {
+//                Treenode<T> oldParent = getParent(root,currNode);
+//                
+//                if (oldParent.key.compareTo(currNode.key) > 0) {
+//                    oldParent.right = thisNode;
+//                }
+//                
+//                else {
+//                    oldParent.left = thisNode;
+//                }
+//                
+//                thisNode.right = currNode.right;
+//            }
+//            
+//            
+//            
+//            thisNode.left = currNode.left;
+//            
+//            }
+//            
             
-            else if(currNode.right == null) {
-                return currNode.left;
+           
+            
+            
+            
+            
+            
+            
+            
+        
+    private Treenode<T> getParent(Treenode<T> currNode, Treenode<T> child) {
+        
+        int comesAfter = currNode.key.compareTo(child.key);
+        
+        if (currNode.left.key != null) {
+            int compareLeft = currNode.left.key.compareTo(child.key);
+            if (compareLeft == 0) {
+                return currNode;
             }
-            
         }
         
-        currNode.key = findMinValue(root.right).key;
-        currNode.right = deleteHelper(currNode.right, currNode.key);
+        if (currNode.right.key != null) {
+            int compareRight = currNode.right.key.compareTo(child.key);
+
+            if(compareRight == 0) {
+                return currNode;
+            }
+        
+        }
+                
+        if (comesAfter < 0) {
+            getParent(currNode.right, child); 
+        }
+                                
+        if (comesAfter > 0) { 
+            getParent(currNode.left, child); 
+        }
+
         return currNode;
         
     }
-
+          
     
     /*
      * 
@@ -249,8 +400,6 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
                 }
     
             }
-    //        currNode.height = max(getHeightOfNode(currNode.left), 
-    //                getHeightOfNode(currNode.right)) +1;
     
             int balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
     
@@ -385,6 +534,8 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         return minRightValue;
         
     }
+    
+   
 
 
     
