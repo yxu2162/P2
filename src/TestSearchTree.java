@@ -258,9 +258,9 @@ public class TestSearchTree {
     public void test14_testAscendingOrder_MultipleInserts_OneDelete() throws DuplicateKeyException {
         strTree.insert("A");
         strTree.insert("C");
-        //strTree.insert("B");
+        strTree.insert("B");
         strTree.delete("A");
-        expected = "C ";
+        expected = "B C ";
         actual = "" + strTree.inAscendingOrder();
         if(! expected.equals(actual)) {
             fail("expected: " +expected+ " actual: " +actual);

@@ -292,38 +292,7 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 
                 
                 
-//                if(currNode.right.left == nullfindMinValue(currNode.right) != null) {
-//
-//                    thisNode = findMinValue(currNode.right);
-//                    minParent = getParent(root, findMinValue(currNode.right));
-//                    minParent.left = null;
-//                }
-//            
-//            else {
-//                thisNode = currNode.right;
-//            }
-//            
-//            if (key != root.key) {
-//                Treenode<T> oldParent = getParent(root,currNode);
-//                
-//                if (oldParent.key.compareTo(currNode.key) > 0) {
-//                    oldParent.right = thisNode;
-//                }
-//                
-//                else {
-//                    oldParent.left = thisNode;
-//                }
-//                
-//                thisNode.right = currNode.right;
-//            }
-//            
-//            
-//            
-//            thisNode.left = currNode.left;
-//            
-//            }
-//            
-            
+
            
             
             
@@ -366,68 +335,7 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
     }
           
     
-    /*
-     * 
-     */
-    private void insertHelper(Treenode<T> currNode, T key) throws DuplicateKeyException {
-    
-            if(lookup(key)) {
-                throw new DuplicateKeyException();
-            }
-    
-            int comesAfter = currNode.key.compareTo(key);
-    
-            if (comesAfter > 0) {
-    
-                if (currNode.left != null) { 
-                    insertHelper(currNode.left, key); 
-                }
-    
-                else { 
-                    currNode.left = new Treenode<T>(key);
-                }
-    
-            }
-    
-            if (comesAfter < 0) {
-    
-                if (currNode.right != null) {
-                    insertHelper(currNode.right, key); 
-                }
-    
-                else { 
-                    currNode.right = new Treenode<T>(key); 
-                }
-    
-            }
-    
-            int balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
-    
-            if(currNode.left != null && balanceFactor>1 
-                    && key.compareTo(currNode.left.key) < 0) { //right rotate
-                rightRotate(currNode, key);
-            }
-    
-            if(currNode.right != null && balanceFactor<0 
-                    && key.compareTo(currNode.right.key) > 0) { //left rotate
-                leftRotate(currNode, key);
-            }
-    
-            if(currNode.left != null && balanceFactor>1 
-                    && key.compareTo(currNode.left.key) < 0) { //left right rotate
-                leftRotate(currNode, key);
-                rightRotate(currNode, key);
-    
-            }
-    
-            if(currNode.right != null && balanceFactor<0 
-                    && key.compareTo(currNode.right.key) > 0) { //right left rotate
-                rightRotate(currNode, key);
-                leftRotate(currNode, key);
-            }
-    
-        }
-
+  
     
     /*
      * 
