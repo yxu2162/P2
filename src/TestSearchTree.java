@@ -258,10 +258,10 @@ public class TestSearchTree {
         strTree.insert("A");
         strTree.insert("C");
         strTree.insert("B");
-//        strTree.delete("C");
-        strTree.height();
-        expected = "A B ";
+        strTree.delete("C");
+        expected = "A C ";
         actual = "" + strTree.inAscendingOrder();
+        strTree.height();
         if(! expected.equals(actual)) {
             fail("expected: " +expected+ " actual: " +actual);
         }

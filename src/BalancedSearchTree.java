@@ -86,7 +86,9 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         else if(root.left == null && root.right == null) {
             return 1;
         }
-        System.out.println(root.key);
+//        System.out.println(root.key);
+//        System.out.println(root.left.key);
+//        System.out.println(root.right.key);
         return max(getHeightOfNode(root.left), getHeightOfNode(root.right)) +1;
     }
 
@@ -141,6 +143,7 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         if(item == null || !lookup(item)) {
             return;
         }
+
         else {
             deleteHelper(this.root, item);
         }
@@ -179,70 +182,158 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
 
             return a;
         }
-
     }
 
+    /*
+     * 
+     */
     private void deleteHelper(Treenode<T> currNode, T key) {
-        //System.out.println(root.key);
+
         int comesAfter = currNode.key.compareTo(key);
-        if(comesAfter < 0) { //currentNode is smaller, go right
+
+        if(comesAfter < 0) {
             deleteHelper(currNode.right, key);
         }
-        if(comesAfter > 0) { //currentNode is bigger, go left
+
+        if(comesAfter > 0) {
             deleteHelper(currNode.left, key);
         }
+
         if(comesAfter == 0) {
-            if(currNode.left == null || currNode.right == null) {
-                if(currNode.left == null && currNode.right == null) { //if no child
+            Treenode<T> thisNode = currNode;
+            Treenode<T> minParent;
+            Treenode<T> thisLeft;
+            Treenode<T> thisParent;
+
+            if (currNode == root) {
+
+                if (root.left == null && root.right == null) {
+                    root = null;
+                }
+
+                else if(root.right == null) {
+                    root = root.left;
+                }
+
+                else if(root.left == null){
+                    root = root.right;
+                }
+
+                else {
+
+                    if(root.right.left != null) {
+                        thisLeft = root.left;
+                        root = findMinValue(root.right);
+                        root.left = thisLeft;
+                        minParent = getParent(root, root.right);
+                        minParent.left = null;
+
+                    }
+
+                    else {
+                        thisLeft = root.left; 
+                        root = root.right;
+                        root.left = thisLeft;
+                    }
+
+                }
+
+            }
+
+            else {
+
+                if (currNode.left == null && currNode.right == null) {
                     currNode = null;
                 }
-                else if(currNode.right == null) { //if one child on left
-                    Treenode<T> temp = currNode;
-                    currNode = currNode.left;
-                    temp = null;
+
+                else if(currNode.right == null) {
+                    thisNode = currNode.left;
+                    thisParent = getParent(root,currNode); 
+
+                    if (thisParent.key.compareTo(currNode.key) > 0) {
+                        thisParent.right = thisNode;
+                    }
+
+                    else {
+                        thisParent.left = thisNode;
+                    }
+
                 }
-                else { //if one child on right
-                    Treenode<T> temp = currNode;
-                    currNode = currNode.right;
-                    temp = null;
+
+                else if(currNode.left == null){
+                    thisNode = currNode.right;
+                    thisParent = getParent(root,currNode);
+
+                    if (thisParent.key.compareTo(currNode.key) > 0) {
+                        thisParent.right = thisNode;
+                    }
+
+                    else {
+                        thisParent.left = thisNode;
+                    }
+
                 }
-            }
-            else {
-                Treenode <T> temp = findMinValue(currNode.right);
-                currNode.key = temp.key;
-                temp = null;
+
+                else {
+                    thisNode = findMinValue(currNode.right);
+                    minParent = getParent(root,findMinValue(currNode.right));
+                    minParent.left = null;
+                    thisParent = getParent(root,currNode);
+
+                    if (thisParent.key.compareTo(currNode.key) > 0) {
+                        thisParent.right = thisNode;
+                    }
+
+                    else {
+                        thisParent.left = thisNode;
+                    }
+
+                    thisNode.left = currNode.left;
+                    thisNode.right = currNode.right;
+
+                }
+
             }
         }
     }
-    //        if(currNode == null) {
-    //            return null;
-    //        }
-    //        int comesAfter = currNode.key.compareTo(key);
-    //
-    //        if(comesAfter < 0) {
-    //            currNode.right = deleteHelper(currNode.right, key);
-    //        }
-    //        if(comesAfter > 0) {
-    //            currNode.left = deleteHelper(currNode.left, key);
-    //        }
-    //
-    //        if(currNode.left == null || currNode.right == null) { //one child or no child
-    //            
-    //            if(currNode.left == null && currNode.right == null) {
-    //                currNode = null;
-    //            }
-    //            if(currNode.left == null) {
-    //                currNode = currNode.right;
-    //                return currNode.right;
-    //            }
-    //            else if(currNode.right == null) {
-    //                currNode = currNode.left;
-    //                return currNode.left;
-    //            }
-    //        }
-    //        currNode.key = findMinValue(root.right).key;
-    //        currNode.right = deleteHelper(currNode.right, currNode.key);
-    //        return currNode;
+
+
+
+
+
+
+
+    private Treenode<T> getParent(Treenode<T> currNode, Treenode<T> child) {
+
+        int comesAfter = currNode.key.compareTo(child.key);
+
+        if (currNode.left.key != null) {
+            int compareLeft = currNode.left.key.compareTo(child.key);
+            if (compareLeft == 0) {
+                return currNode;
+            }
+        }
+
+        if (currNode.right.key != null) {
+            int compareRight = currNode.right.key.compareTo(child.key);
+
+            if(compareRight == 0) {
+                return currNode;
+            }
+
+        }
+
+        if (comesAfter < 0) {
+            getParent(currNode.right, child); 
+        }
+
+        if (comesAfter > 0) { 
+            getParent(currNode.left, child); 
+        }
+
+        return currNode;
+
+    }
 
 
     /*
@@ -261,11 +352,9 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
             if (currNode.left != null) { 
                 insertHelper(currNode.left, key); 
             }
-
-            else { 
+            else {
                 currNode.left = new Treenode<T>(key);
             }
-
         }
 
         if (comesAfter < 0) {
@@ -279,28 +368,32 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
             }
 
         }
+        
         currNode.height = max(getHeightOfNode(currNode.left), getHeightOfNode(currNode.right)) +1;
         int balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
-        System.out.println(currNode.key + " " + balanceFactor);
-        
-        if(balanceFactor == -2 && key.compareTo(currNode.right.key) > 0) { //left rotate
+
+        if(currNode.right != null && balanceFactor == -2 && 
+                key.compareTo(currNode.right.key) > 0) { //left rotate
             System.out.println("Left Rotate");
             leftRotate(currNode);
         }
-        
-        if(balanceFactor == 2 && key.compareTo(currNode.left.key) < 0) { //right rotate
+
+        if(currNode.left != null && balanceFactor == 2 && 
+                key.compareTo(currNode.left.key) < 0) { //right rotate
             System.out.println("Right rotate");
             rightRotate(currNode);
         }
 
-        if(balanceFactor == 2 && key.compareTo(currNode.left.key) < 0) { //left right rotate
+        if(currNode.left != null && balanceFactor == 2 && 
+                key.compareTo(currNode.left.key) < 0) { //left right rotate
             System.out.println("Right rotate");
             leftRotate(currNode);
             rightRotate(currNode);
 
         }
-        
-        if(balanceFactor == -2 && key.compareTo(currNode.left.key) > 0) { //right left rotate
+
+        if(currNode.right != null && balanceFactor == -2 && 
+                key.compareTo(currNode.right.key) > 0) { //right left rotate
             System.out.println("Right Rotate");
             rightRotate(currNode);
             leftRotate(currNode);
@@ -416,6 +509,8 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         return minRightValue;
 
     }
+
+
 
 
 
