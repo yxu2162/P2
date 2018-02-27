@@ -86,9 +86,9 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
         else if(root.left == null && root.right == null) {
             return 1;
         }
-//        System.out.println(root.key);
-//        System.out.println(root.left.key);
-//        System.out.println(root.right.key);
+        //        System.out.println(root.key);
+        //        System.out.println(root.left.key);
+        //        System.out.println(root.right.key);
         return max(getHeightOfNode(root.left), getHeightOfNode(root.right)) +1;
     }
 
@@ -368,38 +368,29 @@ public class BalancedSearchTree<T extends Comparable<T>> implements SearchTreeAD
             }
 
         }
-        
+        checkBalance(currNode, key);
+    }
+    private void checkBalance(Treenode<T> currNode, T key) {
+
         currNode.height = max(getHeightOfNode(currNode.left), getHeightOfNode(currNode.right)) +1;
         int balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
 
-        if(currNode.right != null && balanceFactor == -2 && 
-                key.compareTo(currNode.right.key) > 0) { //left rotate
-            System.out.println("Left Rotate");
+        if(balanceFactor == -2) {
             leftRotate(currNode);
-        }
-
-        if(currNode.left != null && balanceFactor == 2 && 
-                key.compareTo(currNode.left.key) < 0) { //right rotate
-            System.out.println("Right rotate");
-            rightRotate(currNode);
-        }
-
-        if(currNode.left != null && balanceFactor == 2 && 
-                key.compareTo(currNode.left.key) < 0) { //left right rotate
-            System.out.println("Right rotate");
-            leftRotate(currNode);
-            rightRotate(currNode);
+            balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
+            if(balanceFactor == 2) {
+                rightRotate(currNode);
+            }
 
         }
-
-        if(currNode.right != null && balanceFactor == -2 && 
-                key.compareTo(currNode.right.key) > 0) { //right left rotate
-            System.out.println("Right Rotate");
+        if(balanceFactor == 2) {
             rightRotate(currNode);
-            leftRotate(currNode);
+            balanceFactor = getHeightOfNode(currNode.left)-getHeightOfNode(currNode.right);
+            if(balanceFactor == -2) {
+                rightRotate(currNode);
+            }
         }
     }
-
     /*
      * 
      */
